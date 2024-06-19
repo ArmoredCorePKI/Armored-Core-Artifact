@@ -2,10 +2,10 @@
 
 ## Component
 
-- CA (on Lets'Encrypt Pebble)
-- Log server (on Google Triilian)
-- Domain (on Certbot)
-- Client (Mozilia Web Extension)
+- CA (on Lets'Encrypt Pebble): https://github.com/ArmoredCorePKI/Armored-Core-Pebble
+- Log server (on Google Trillian): We can directly use the original Trillian codebase https://github.com/google/trillian 
+- Domain (on Certbot): https://github.com/ArmoredCorePKI/Armored-Core-Certbot
+- Client (Mozilia Web Extension): https://github.com/ArmoredCorePKI/Armored-Core-Extension
 
 ## Prerequisite
 
