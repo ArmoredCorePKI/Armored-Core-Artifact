@@ -4,8 +4,7 @@ Artifact guidance for the paper *Armored Core of PKI: Removing Signing Keys for 
 
 [Arxiv](https://arxiv.org/abs/2404.15582) | [PapersWithCode](https://paperswithcode.com/paper/armored-core-of-pki-remove-signing-keys-for) | [Code Repos](https://github.com/ArmoredCorePKI)
 
-<img src="figs/acorelogo.jpeg" width="85%">
-
+<img title="" src="figs/acorelogo-nobg.png" alt="" align="center" data-align="center">
 
 > This page is not finished
 
@@ -14,7 +13,6 @@ Artifact guidance for the paper *Armored Core of PKI: Removing Signing Keys for 
 - Make sure you have the `sudo` and `root` privileges for your machine
 - Golang environment (verision >= 1.21)
 
-
 ## 📁 Component
 
 - 🏢 **CA** (on Lets'Encrypt [Pebble](https://github.com/letsencrypt/pebble)): https://github.com/ArmoredCorePKI/Armored-Core-Pebble
@@ -22,10 +20,10 @@ Artifact guidance for the paper *Armored Core of PKI: Removing Signing Keys for 
 - 🌐 **Domain** (on [Certbot](https://github.com/certbot/certbot)): https://github.com/ArmoredCorePKI/Armored-Core-Certbot
 - 🖥️ **Client** (Mozilia Web Extension): https://github.com/ArmoredCorePKI/Armored-Core-Extension
 
-
 ## ⚙️ Run the system
 
 - Step1: Prepare four terminals
+  
   - 🔷 one terminal for Logger
   - 🔶 one terminal for CA
   - 🔴 one terminal for Domain
@@ -38,6 +36,7 @@ sudo vim /etc/hosts
 
 # add records: 127.0.0.1 mydomain.test`
 ```
+
 - (⚫) Remove the old Let's Encrypt File 
 
 ```bash
@@ -53,7 +52,6 @@ go run github.com/google/trillian/cmd/trillian_log_signer --sequencer_interval="
 ```
 
 Remember the Tree ID, e.g., 84734734810528304839
-
 
 - Step4: (🔶) Run Armored Core Pebble 
 
@@ -71,7 +69,7 @@ sudo your_virtual_python3_bin main.py certonly --standalone -d mydomain.test --s
 ```
 
 > We now use the root terminal (⚫) to request the root certificate
-`curl -k -s -o /etc/letsencrypt/live/mydomain.test/roots.pem https://localhost:15000/roots/0`
+> `curl -k -s -o /etc/letsencrypt/live/mydomain.test/roots.pem https://localhost:15000/roots/0`
 
 Then we can verify the whole certificate chain and entry chain. (make sure first edit the `BASEINDEX` in `trillianclient/tclient_util.pp` as the AppendEntry `treesize - 4`, we will improve this workflow later :-) )
 
@@ -88,11 +86,9 @@ web-ext run
 
 You can open the Browser console and see the output.
 
-
 ## 👀 Evaluation
 
 TODO
-
 
 ## 🙇‍♂️ Acknowledgements
 
@@ -103,6 +99,3 @@ We appreciate the following projects.
 - [Certificate Transparency](https://github.com/google/certificate-transparency-go)
 - [Certbot](https://github.com/certbot/certbot)
 - [F-PKI](https://github.com/netsec-ethz/fpki) (NDSS' 2022) 
-
-
-
