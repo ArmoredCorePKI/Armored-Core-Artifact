@@ -6,7 +6,7 @@ Artifact guidance for the paper *Armored Core of PKI: Removing Signing Keys for 
 
 <img title="" src="figs/acorelogo-nobg.png" alt="" align="center" data-align="center">
 
-> This page is not finished
+> This page is not finished, the docker environment is in preparation.
 
 ## 🔨 Prerequisites
 
@@ -20,7 +20,7 @@ Artifact guidance for the paper *Armored Core of PKI: Removing Signing Keys for 
 - 🌐 **Domain** (on [Certbot](https://github.com/certbot/certbot)): https://github.com/ArmoredCorePKI/Armored-Core-Certbot
 - 🖥️ **Client** (Mozilia Web Extension): https://github.com/ArmoredCorePKI/Armored-Core-Extension
 
-## ⚙️ Run the system
+## ⚙️ Manually Run the system
 
 - Step1: Prepare four terminals
   
@@ -85,6 +85,35 @@ web-ext run
 ```
 
 You can open the Browser console and see the output.
+
+## :whale: Docker
+
+> The dockerfile and docker compose file are not ready yet and we first demonstrate the following instructions.
+
+-  Compiling the three containers
+`docker-compose up --build --force-recreate`
+- You can re-built them without cache `docker-compose build --no-cache`
+
+- Then acquire the ip address of the three containers for later use.
+`docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}} {{end}}' acore-ca acore-domain acore-logger`
+
+- Next, attach into the containers to execute the Armored PKI system.
+- First, attach into the logger container 
+	- execute the init script `sh ./init.sh`, the password of mysql is null, just directly press Enter.
+	- You may see some connection refused errors in the beginning but that's okay. In the end, the TREE ID should be printed out in the terminal.
+	- We can check the trillian service by `ps -aux | grep trillian`, which should show the corresponding log server and log signer process.
+
+- Second, attach to the CA container. We can forget about the logger container for now.
+	- `vim /etc/hosts`, then add `the_domain_container ip	mydomain.acore`
+	- `go install --buildvcs=false ./cmd/pebble`
+	- `~/go/bin/pebble -config ./test/config/pebble-config.json -treeid=YOUR_TREE_ID`
+
+- At last, attach into the Domain container.
+	- `cd ./certbot`
+	- `python3 main.py certonly --standalone -d mydomain.acore --server https://acore-ca:14000/dir --email you@example.com --agree-tos --no-verify-ssl --http-01-port=5002`
+
+- Then certificate issuance is completed. We can check out the output and logs in the terminals from the three containers.
+
 
 ## 👀 Evaluation
 
