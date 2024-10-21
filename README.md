@@ -4,7 +4,7 @@ Artifact guidance for the paper *Armored Core of PKI: Removing Signing Keys for 
 
 <!--[Arxiv](https://arxiv.org/abs/2404.15582) | [PapersWithCode](https://paperswithcode.com/paper/armored-core-of-pki-remove-signing-keys-for) | -->
 
-[Code Repos](https://github.com/ArmoredCorePKI) (Contains Four Code Repos)
+[Code Repos](https://github.com/ArmoredCorePKI) (A special anonymous account containing 4 code repos)
 
 <img title="" src="figs/acorelogo-nobg.png" alt="" align="center" data-align="center">
 
@@ -90,7 +90,7 @@ You can open the Browser console and see the output.
 
 ## :whale: Docker
 
-> The dockerfile and docker compose file are not ready yet and we first demonstrate the following instructions.
+> The dockerfile and docker compose file are almost ready and we first demonstrate the following deployment instructions.
 
 -  Compiling the three containers
 `docker-compose up --build --force-recreate`
